@@ -1,6 +1,6 @@
 import turtle
+import random
 
-colours = ['red', 'green', 'blue', 'purple', 'grey', 'black']
 
 def shape(side_length, colour, angle=90):
     turtle.color(colour)
@@ -19,7 +19,7 @@ turtle.right(90)
 n = 14
 
 for i in range(1, n, 1):
-    colour = colours[i % len(colours)]
+    colour = "#" + "{:06x}".format(random.randrange(0, 0xffffff))
     shape(side_length, colour)
     side_length, previous_side = (side_length + previous_side, side_length)
 
