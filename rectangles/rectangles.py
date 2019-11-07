@@ -14,10 +14,10 @@ for i1 in range(0, n):
             for i2 in range(j1 + 1, n):
                 for j2 in range(i2 + 1, n):
                     if x[i2] == x[j2]:
-                        if (y[i1] == y[i2] and y[j1] == y[j2]):
-                            print(f'Rectangle found')
+                        if (y[i1] == y[i2] and y[j1] == y[j2]) or (y[i1] == y[j2] and y[j1] == y[i2]):
+                            print(f'Rectangle found ({x[i1]}, {y[i1]}), '
+                                  f'({x[j1]}, {y[j1]}), ({x[i2]}, {y[i2]}), ({x[j2]}, {y[j2]})')
                             rectangles += 1
-    i1 += 1
 
 if rectangles == 0:
     print('No rectangles found')
