@@ -3,10 +3,16 @@
 
 
 def bubble_sort(array):
+    sort = False
     for i in range(len(array)):
-        for j in range(len(array)-i-1):
-            if array[j] > array[j+1]:
-                array[j], array[j+1] = array[j+1], array[j]
+        if not sort:
+            sort = True
+            for j in range(len(array)-i-1):
+                if array[j] > array[j+1]:
+                    array[j], array[j+1] = array[j+1], array[j]
+                    sort = False
+        else:
+            return array
     return array
 
 
