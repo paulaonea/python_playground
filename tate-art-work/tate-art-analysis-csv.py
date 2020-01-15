@@ -36,3 +36,18 @@ df['area'] = df['height'] * df['width']
 print(f"The largest artwork is {df.loc[df['area'].idxmax(), :]}.")
 
 
+# Iterations over groups
+# I will work with a small number of entries
+
+extract_df = df.iloc[49980:50020, :].copy()
+grouped = extract_df.groupby('artist')
+
+for name, group_df in grouped:
+    print(f'\n{name}')
+    print(group_df)
+
+# # print first acquisition year for every artist
+for name, group_df in grouped:
+    min_year = group_df['acquisitionYear'].min()
+    print(f'\nFirst artwork acquired for artist {name} was acquired in {min_year: .0f}.')
+
