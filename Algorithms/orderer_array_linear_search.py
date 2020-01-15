@@ -1,4 +1,5 @@
 # Linear search = search every element of the array starting with position 0, until the value is found or until the end.
+# Efficiency O(N)
 
 
 def linear_search(array, number):
