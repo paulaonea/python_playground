@@ -1,8 +1,9 @@
 # Check an array for duplicates
-# Efficiency O(N^2)
 
 
-def check_duplicates(array):
+def check_duplicates_algorithm1(array):
+    # Efficiency of this algorithm is O(N^2) as it has two nested for loops.
+
     for i in range(len(array) -1):
         for j in range(i+1, len(array)):
             if array[i] == array[j]:
@@ -10,5 +11,19 @@ def check_duplicates(array):
     return f'The array does not contain duplicates'
 
 
-array = [12, 14, 18, 30, 32, 52, 22, 22]
-print(check_duplicates(array))
+def check_duplicates_algorithm2(array):
+    # Efficiency of this algorithm is O(N) as there are two separate for loops.
+    a = []
+    for i in range(max(array)+1):
+        a.append(0)
+    for i in range(len(array)):
+        if a[array[i]] == 1:
+            return f'The array contains duplicates'
+        else:
+            a[array[i]] = 1
+    return f'The array does not contain duplicates'
+
+
+array = [1, 4, 8, 3, 5, 7, 9, 9]
+print(check_duplicates_algorithm2(array))
+print(max(array))
