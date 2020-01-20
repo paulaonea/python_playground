@@ -1,9 +1,9 @@
 # Check an array for duplicates
 
 
+# 1. Quadratic solution:
+# Efficiency of this algorithm is O(N^2) as it has two nested for loops.
 def check_duplicates_algorithm1(array):
-    # Efficiency of this algorithm is O(N^2) as it has two nested for loops.
-
     for i in range(len(array) -1):
         for j in range(i+1, len(array)):
             if array[i] == array[j]:
