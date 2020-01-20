@@ -4,11 +4,12 @@
 
 def selection_sort(array):
     for i in range(len(array)-1):
-        minim, index = array[i], i
+        index_min = i
         for j in range(i+1, len(array), 1):
-            if array[j] < minim:
-                minim, index = array[j], j
-        array[i], array[index] = array[index], array[i]
+            if array[j] < array[index_min]:
+                index_min = j
+        if index_min != i:
+            array[i], array[index_min] = array[index_min], array[i]
     return array
 
 
