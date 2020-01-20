@@ -6,14 +6,9 @@ def insertion_sort(array):
     for i in range(1, len(array)):
         value = array[i]
         index_to_insert = i
-        for j in range(i-1, -1, -1):
-            if j >= 0:
-                if array[j] > value:
-                    array[j+1] = array[j]
-                    index_to_insert = j
-                else:
-                    array[j+1] = value
-                    break
+        while index_to_insert > 0 and array[index_to_insert - 1] > value:
+            array[index_to_insert] = array[index_to_insert -1]
+            index_to_insert -=1
         array[index_to_insert] = value
     return array
 
