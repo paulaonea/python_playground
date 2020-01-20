@@ -11,8 +11,9 @@ def check_duplicates_algorithm1(array):
     return f'The array does not contain duplicates'
 
 
-def check_duplicates_algorithm2(array):
+# 2. Linear solution
     # Efficiency of this algorithm is O(N) as there are two separate for loops.
+def check_duplicates_algorithm2(array):
     a = []
     for i in range(max(array)+1):
         a.append(0)
@@ -25,5 +26,5 @@ def check_duplicates_algorithm2(array):
 
 
 array = [1, 4, 8, 3, 5, 7, 9, 9]
-print(check_duplicates_algorithm2(array))
+print(check_duplicates_algorithm1(array))
 print(max(array))
