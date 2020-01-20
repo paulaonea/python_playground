@@ -12,7 +12,7 @@ def check_duplicates_algorithm1(array):
 
 
 # 2. Linear solution
-    # Efficiency of this algorithm is O(N) as there are two separate for loops.
+# Efficiency of this algorithm is O(N) as there are two separate for loops.
 def check_duplicates_algorithm2(array):
     a = []
     for i in range(max(array)+1):
