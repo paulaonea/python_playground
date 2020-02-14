@@ -31,6 +31,11 @@ class Flight:
         return self._seating
 
     def allocate_seat(self, seat, passenger):
+        """Allocate seat for a new passenger
+        Args: seat - seat number to be allocated
+               passenger - name
+        Raise error if seat is already occupied"""
+
         row, letter = self._parse_seat(seat)
         if self._seating[row][letter] is not None:
             raise ValueError(f"Seat {seat} is already occupied.")
@@ -38,6 +43,14 @@ class Flight:
         return
 
     def re_allocate_seat(self, old_seat, new_seat, passenger):
+        """Re-allocate seat for an existing passenger
+        Args: old_seat - current seat number
+              new_seat - new seat to be allocated to existing passenger
+              passenger - name of the existing passenger (used as extra validation criteria
+        Raise error
+              if the passenger does not correspond to old_seat
+              if new seat is occupied"""
+
         old_row, old_letter = self._parse_seat(old_seat)
         if self._seating[old_row][old_letter] != passenger:
             raise ValueError(f"Old Seat Error. {passenger} does not occupy seat {old_seat}")
@@ -46,6 +59,12 @@ class Flight:
         return
 
     def _parse_seat(self, seat):
+        """Used to parse seat_number into:
+                row - row number
+                letter - seat letter
+            Raise error if
+                seat does not end with letter
+                row number is not number or row number is different than the aircraft's seating plan"""
         rows, seat_letters = self._aircraft.seating_plan()
 
         letter = seat[-1]
@@ -62,24 +81,29 @@ class Flight:
         return row, letter
 
     def total_seats(self):
+        """Returns total number of seats in the aircraft."""
         return sum(sum(1 for s in row.values()) for row in self.seating() if row is not None)
 
     def num_available_seats(self):
+        """Returns total number of available seats in the aircraft."""
         return sum(sum(1 for s in row.values() if s is None)
                    for row in self.seating() if row is not None)
 
     def free_seats(self):
+        """Returns the list with all available seats in the aircraft."""
         rows, seat_letters = self._aircraft.seating_plan()
         free_seats = [None] + [{letter: None for letter in seat_letters if self._seating[_][letter] is None}
                                for _ in rows if _ is not None]
         return free_seats
 
     def make_boarding_card(self, card_printer):
+        """Send boarding card to be printed in a specified format."""
         passengers_booked = self._passenger_seats()
         for passenger, seat in passengers_booked:
             card_printer(passenger, seat, self.number(), self.aircraft_model())
 
     def _passenger_seats(self):
+        """Returns tupples (passenger_name, allocated_seat)"""
         passengers_booked = []
         row_numbers, seats_letters = self._aircraft.seating_plan()
         for row in row_numbers:
