@@ -98,20 +98,17 @@ class Flight:
 
     def make_boarding_card(self, card_printer):
         """Send boarding card to be printed in a specified format."""
-        passengers_booked = self._passenger_seats()
-        for passenger, seat in passengers_booked:
+        for passenger, seat in sorted(self._passenger_seats()):
             card_printer(passenger, seat, self.number(), self.aircraft_model())
 
     def _passenger_seats(self):
         """Returns tupples (passenger_name, allocated_seat)"""
-        passengers_booked = []
         row_numbers, seats_letters = self._aircraft.seating_plan()
         for row in row_numbers:
             for letter in seats_letters:
                 passenger = self._seating[row][letter]
                 if passenger is not None:
-                    passengers_booked.append((passenger, f"{row}{letter}"))
-        return passengers_booked
+                    yield (passenger, f"{row}{letter}")
 
 
 class Aircraft:
