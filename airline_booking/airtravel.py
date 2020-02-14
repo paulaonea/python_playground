@@ -112,6 +112,8 @@ class Flight:
 
 
 class Aircraft:
+    """Class used as base class for all aircrafts.
+    defines common attributes and methods for all derived classes."""
 
     def __init__(self, registration):
         self._registration = registration
@@ -125,6 +127,7 @@ class Aircraft:
 
 
 class Airbus319(Aircraft):
+    """Derived class used for specific attributes and methods for this aircraft model."""
 
     def model(self):
         return "Airbus319"
@@ -134,6 +137,7 @@ class Airbus319(Aircraft):
 
 
 class Boeing777(Aircraft):
+    """Derived class used for specific attributes and methods for this aircraft model."""
 
     def model(self):
         return "Boeing777"
