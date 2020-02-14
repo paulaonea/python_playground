@@ -82,7 +82,7 @@ class Flight:
 
     def total_seats(self):
         """Returns total number of seats in the aircraft."""
-        return sum(sum(1 for s in row.values()) for row in self.seating() if row is not None)
+        return self._aircraft.total_seats()
 
     def num_available_seats(self):
         """Returns total number of available seats in the aircraft."""
@@ -112,21 +112,34 @@ class Flight:
 
 
 class Aircraft:
-    def __init__(self, registration, model, num_rows, num_seats_per_row):
+
+    def __init__(self, registration):
         self._registration = registration
-        self._model = model
-        self._num_rows = num_rows
-        self._num_seats_per_row = num_seats_per_row
 
     def registration(self):
         return self._registration
 
+    def total_seats(self):
+        rows, rows_seats = self.seating_plan()
+        return len(rows) * len(rows_seats)
+
+
+class Airbus319(Aircraft):
+
     def model(self):
-        return self._model
+        return "Airbus319"
 
     def seating_plan(self):
-        return (range(1, self._num_rows + 1),
-                "ABCDEFGHIJK"[:self._num_seats_per_row])
+        return(range(1,23), "ABCDEF")
+
+
+class Boeing777(Aircraft):
+
+    def model(self):
+        return "Boeing777"
+
+    def seating_plan(self):
+        return(range(1,54), "ABCDEFGH")
 
 
 def console_card_printer(passenger, seat, flight_number, aircraft):
